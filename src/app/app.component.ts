@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'my-store';
+  imgParent = '';
+
+  onLoaded(url: string) {
+    console.log('log padre' + url)
+  }
 }
