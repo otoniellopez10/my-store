@@ -1,5 +1,7 @@
 <p>La cantidad {{ myShoppingCart.length }}</p>
 <p>TOTAL: ${{ total }}</p>
+<p>Today: {{ today | date: "short" }}</p>
+<p>Otra feha: {{ date | date: "dd-MM-YYYY" }}</p>
 <div class="products--grid">
   <app-product
     [product]="product"
