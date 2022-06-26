@@ -2,6 +2,7 @@
 <p>TOTAL: ${{ total }}</p>
 <p>Today: {{ today | date: "short" }}</p>
 <p>Otra feha: {{ date | date: "dd-MM-YYYY" }}</p>
+<p>TimeAgo: {{ date | timeAgo }}</p>
 <div class="products--grid">
   <app-product
     [product]="product"
