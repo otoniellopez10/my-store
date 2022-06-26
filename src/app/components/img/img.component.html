@@ -1,9 +1,10 @@
 <img
-  [src]="img"
   (load)="imgLoaded()"
   (error)="imgError()"
+  [src]="img"
   *ngIf="img; else elseImg"
 />
 <ng-template #elseImg>
-  <img [src]="imageDefault" alt="" width="200px" />
+  <img [src]="imageDefault" alt="" />
 </ng-template>
+<!-- <i class="bi bi-file-code-fill"></i> -->
