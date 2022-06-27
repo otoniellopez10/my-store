@@ -1,13 +1,13 @@
 <div class="show-mobile">
   <div>
     <button (click)="toggleMenu()">
-      <i class="bi bi-list"></i>
+      <img src="./assets/svg/icon_menu.svg" alt="menu" />
     </button>
     <a href="">
       <img src="./assets/svg/logo_yard_sale.svg" alt="logo" />
     </a>
     <a href="">
-      <i class="bi bi-shop-window"></i>
+      <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
     </a>
   </div>
   <div class="side-menu" [class.active]="activeMenu">
@@ -33,10 +33,11 @@
     </nav>
     <div class="info">
       <div class="account">nicolas@nicolas.com</div>
-      <div>
+      <div class="cart">
         <a href="">
-          <i class="bi bi-shop-window"></i>
+          <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
         </a>
+        <span class="counter">{{ counter }}</span>
       </div>
     </div>
   </div>

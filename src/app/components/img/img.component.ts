@@ -5,23 +5,16 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, AfterViewIni
   templateUrl: './img.component.html',
   styleUrls: ['./img.component.scss']
 })
-export class ImgComponent implements OnInit, OnChanges {
+export class ImgComponent {
   img: string = '';
   @Input('img')
-  set changeImage(newImg: string) {
+  set changeImg(newImg: string) {
     this.img = newImg
   }
   @Output() loaded = new EventEmitter<string>();
   imageDefault: string = './assets/images/default.jpg';
 
   constructor() { }
-
-  ngOnChanges() {
-
-  }
-
-  ngOnInit(): void {
-  }
 
   imgError() {
     this.img = this.imageDefault;
