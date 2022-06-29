@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, AfterViewIni
 })
 export class ImgComponent {
   img: string = '';
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('img')
   set changeImg(newImg: string) {
     this.img = newImg
@@ -21,7 +22,6 @@ export class ImgComponent {
   }
 
   imgLoaded() {
-    console.log('log hijo');
     this.loaded.emit(this.img)
   }
 
