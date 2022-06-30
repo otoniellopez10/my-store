@@ -29,6 +29,8 @@ export class ProductsComponent implements OnInit {
     },
     description: ''
   }
+  limit: number = 10
+  offset: number = 0
 
   constructor(
     private storeService: StoreService,
@@ -38,9 +40,10 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsService.getAllProducts()
+    this.productsService.getProducts(this.limit, this.offset)
       .subscribe(data => {
         this.products = data;
+        this.offset += this.limit
       })
   }
 
@@ -101,6 +104,14 @@ export class ProductsComponent implements OnInit {
         const productIndex = this.products.findIndex(product => product.id === id)
         this.products.splice(productIndex, 1)
         this.toggleProductDetail()
+      })
+  }
+
+  loadMore() {
+    this.productsService.getProducts(this.limit, this.offset)
+      .subscribe(data => {
+        this.products = [...this.products, ...data]
+        this.offset += this.limit
       })
   }
 }
