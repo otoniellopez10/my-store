@@ -29,4 +29,8 @@ export class ProductsService {
 
     return this.http.put<Product>(`${this.apiUrl}/products/${id}`, dto);
   }
+
+  detele(id: string) {
+    return this.http.delete<boolean>(`${this.apiUrl}/products/${id}`);
+  }
 }
