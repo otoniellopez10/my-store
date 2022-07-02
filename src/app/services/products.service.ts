@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model'
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private apiUrl = '/api'
+  private apiUrl = `${environment.API_URL}/api`
 
   constructor(
     private http: HttpClient
