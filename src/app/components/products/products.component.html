@@ -1,4 +1,5 @@
 <button (click)="createNewProduct()">Create new Product</button>
+<button (click)="onShowDetail('121212')">Detalle not found</button>
 <div class="products--grid">
   <app-product
     [product]="product"
@@ -10,6 +11,10 @@
 </div>
 
 <div class="product-detail" [ngClass]="{ active: showProductDetail }">
+  {{ statusDetail }}
+  <div class="spinner-border" role="status" *ngIf="statusDetail === 'loading'">
+    <span class="sr-only">Loading...</span>
+  </div>
   <div *ngIf="productDetail">
     <button (click)="toggleProductDetail()">Close</button>
     <h1>{{ productDetail.title }}</h1>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model'
+import Swal from 'sweetalert2';
+
 
 import { StoreService } from '../../services/store.service'
 import { ProductsService } from '../../services/products.service'
@@ -31,6 +33,7 @@ export class ProductsComponent implements OnInit {
   }
   limit: number = 10
   offset: number = 0
+  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init'
 
   constructor(
     private storeService: StoreService,
@@ -57,11 +60,23 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
+    this.statusDetail = 'loading'
     this.productsService.getProduct(id)
-      .subscribe(data => {
-        console.log('Open', data)
-        this.productDetail = data;
-        this.toggleProductDetail();
+      .subscribe({
+        next: (data: Product) => {
+          console.log('Open', data)
+          this.productDetail = data;
+          this.toggleProductDetail();
+          this.statusDetail = 'success'
+        },
+        error: errorMsg => {
+          this.statusDetail = 'error'
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: errorMsg
+          })
+        }
       })
   }
 
