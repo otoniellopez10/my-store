@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { zip } from 'rxjs'
+import { switchMap } from 'rxjs/operators'
 import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model'
 import Swal from 'sweetalert2';
 
@@ -77,6 +79,30 @@ export class ProductsComponent implements OnInit {
             text: errorMsg
           })
         }
+      })
+  }
+
+
+  readAndUpdate(id: string) {
+    // Para hacer peticiones que dependen una de la otra
+    this.productsService.getProduct(id)
+      .pipe(
+        switchMap(product => {
+          return this.productsService.update(id, { title: 'New title' })
+        })
+      )
+      .subscribe(data => {
+        console.log(data)
+      })
+
+    // Para hacer peticiones al mismo tiempo
+    zip(
+      this.productsService.getProduct(id),
+      this.productsService.update(id, { title: 'New title' })
+    )
+      .subscribe(response => {
+        const read = response[0]
+        const update = response[1]
       })
   }
 
