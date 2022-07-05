@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import Swal from 'sweetalert2';
 
-import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { UsersService } from './services/users.service';
 })
 export class AppComponent {
   imgParent = '';
+  token = '';
 
   constructor(
-    private authService: AuthService,
     private usersService: UsersService
   ) { }
 
@@ -23,18 +23,20 @@ export class AppComponent {
   createUser() {
     this.usersService.create({
       name: 'Otoniel',
-      email: 'otoniellopez10@gmail.com',
-      password: '123'
+      email: 'otoniel@gmail.com',
+      password: '123456'
     })
-      .subscribe(rta => {
-        console.log(rta);
-      })
-  }
-
-  login() {
-    this.authService.login('otoniellopez10@gmail.com', '123')
-      .subscribe(rta => {
-        console.log(rta.access_token);
+      .subscribe({
+        next: rta => {
+          console.log(rta);
+        },
+        error: err => {
+          Swal.fire({
+            title: 'Error',
+            text: err.error.message,
+            icon: 'error',
+          })
+        }
       })
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { switchMap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { User, CreateUserDTO } from '../models/user.model';
@@ -20,7 +21,24 @@ export class AuthService {
     return this.http.post<Auth>(`${this.apiUrl}/login`, { email, password });
   }
 
-  profile(token: string) {
-    return this.http.get<User>(`${this.apiUrl}/profile`);
+  getProfile(token: string) {
+    // let headers = new HttpHeaders()
+    // headers.set('Authorization', `Bearer ${token}`);
+    // headers = headers.set('Content-type', 'application/json');
+    return this.http.get<User>(`${this.apiUrl}/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  loginAndgetProfile(email: string, password: string) {
+    return this.login(email, password)
+      .pipe(
+        switchMap(token => {
+          return this.getProfile(token.access_token);
+        })
+      )
+
   }
 }
