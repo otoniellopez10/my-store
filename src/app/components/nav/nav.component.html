@@ -33,7 +33,9 @@
     </nav>
     <div class="info">
       <div class="account">
-        <button (click)="login()" *ngIf="!token; else elseBlock">Login</button>
+        <button (click)="login()" *ngIf="!profile; else elseBlock">
+          Login
+        </button>
         <ng-template #elseBlock>{{ profile?.email }}</ng-template>
       </div>
       <div class="cart">

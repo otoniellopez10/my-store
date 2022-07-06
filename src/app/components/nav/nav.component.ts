@@ -15,13 +15,7 @@ export class NavComponent implements OnInit {
 
   activeMenu = false
   counter: number = 0;
-  token = '';
-  profile: User = {
-    id: '',
-    email: '',
-    password: '',
-    name: ''
-  }
+  profile: User | null = null
 
 
   constructor(
@@ -44,7 +38,6 @@ export class NavComponent implements OnInit {
       .subscribe({
         next: user => {
           this.profile = user;
-          this.token = '---';
         },
         error: err => {
           Swal.fire({
@@ -55,12 +48,5 @@ export class NavComponent implements OnInit {
         }
       }
       );
-  }
-
-  getProfile() {
-    this.authService.getProfile(this.token)
-      .subscribe(rta => {
-        this.profile = rta;
-      })
   }
 }
