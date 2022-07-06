@@ -1,7 +1,8 @@
+import { TimeInterceptor } from './interceptors/time.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SwiperModule } from 'swiper/angular';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +34,9 @@ import { HighlightDirective } from './directives/highlight.directive';
     HttpClientModule,
     SwiperModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
