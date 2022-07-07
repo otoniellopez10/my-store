@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { zip } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model'
@@ -13,12 +13,12 @@ import { ProductsService } from '../../services/products.service'
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 
   myShoppingCart: Product[] = [];
   total: number = 0
 
-  products: Product[] = [];
+  @Input() products: Product[] = [];
   today = new Date();
   date = new Date(2021, 1, 21);
   showProductDetail = false
@@ -33,8 +33,6 @@ export class ProductsComponent implements OnInit {
     },
     description: ''
   }
-  limit: number = 10
-  offset: number = 0
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init'
 
   constructor(
@@ -42,14 +40,6 @@ export class ProductsComponent implements OnInit {
     private productsService: ProductsService
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart()
-  }
-
-  ngOnInit(): void {
-    this.productsService.getProducts(this.limit, this.offset)
-      .subscribe(data => {
-        this.products = data;
-        this.offset += this.limit
-      })
   }
 
   onAddToShoppingCart(product: Product) {
@@ -145,14 +135,6 @@ export class ProductsComponent implements OnInit {
         const productIndex = this.products.findIndex(product => product.id === id)
         this.products.splice(productIndex, 1)
         this.toggleProductDetail()
-      })
-  }
-
-  loadMore() {
-    this.productsService.getProducts(this.limit, this.offset)
-      .subscribe(data => {
-        this.products = [...this.products, ...data]
-        this.offset += this.limit
       })
   }
 }
