@@ -8,5 +8,6 @@
 <p>{{ product.title }}</p>
 <p>IVA: {{ product?.taxes | currency: "USD" }}</p>
 <!-- <p appHighlight>{{ product.description }}</p> -->
-<button (click)="onShowDetail()">Ver detalles</button>
+<!-- <button (click)="onShowDetail()">Ver detalles</button> -->
+<a routerLink="." [queryParams]="{ product: product.id }">Show details</a>
 <button (click)="onAddToCart()">Add cart</button>
