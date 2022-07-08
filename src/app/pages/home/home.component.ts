@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  loadMore() {
+  onLoadMore() {
     this.productsService.getProducts(this.limit, this.offset)
       .subscribe(data => {
         this.products = [...this.products, ...data]

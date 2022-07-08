@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { zip } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model'
@@ -19,6 +19,8 @@ export class ProductsComponent {
   total: number = 0
 
   @Input() products: Product[] = [];
+  @Output() loadMore = new EventEmitter();
+
   today = new Date();
   date = new Date(2021, 1, 21);
   showProductDetail = false
@@ -136,5 +138,9 @@ export class ProductsComponent {
         this.products.splice(productIndex, 1)
         this.toggleProductDetail()
       })
+  }
+
+  onLoadMore() {
+    this.loadMore.emit()
   }
 }
