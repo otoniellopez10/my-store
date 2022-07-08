@@ -37,13 +37,17 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: 'recovery',
+    component: RecoveryComponent,
+  },
+  {
     path: 'profile',
     component: ProfileComponent,
   },
   {
-    path: 'recovery',
-    component: RecoveryComponent,
-  },
+    path: '**',
+    component: NotFoundComponent,
+  }
 ];
 
 @NgModule({
