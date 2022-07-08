@@ -3,9 +3,9 @@ import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angu
 import { retry, catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model'
-import { checkTime } from '../interceptors/time.interceptor';
-import { environment } from '../../environments/environment';
+import { Product, CreateProductDTO, UpdateProductDTO } from './../models/product.model'
+import { checkTime } from './../interceptors/time.interceptor';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

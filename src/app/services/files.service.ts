@@ -4,7 +4,7 @@ import { tap, map } from 'rxjs/operators';
 
 import { saveAs } from 'file-saver';
 
-import { environment } from '../../environments/environment';
+import { environment } from './../../environments/environment';
 
 interface File {
   originalname: string;

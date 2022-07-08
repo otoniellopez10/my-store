@@ -13,7 +13,7 @@ export class ImgComponent {
     this.img = newImg
   }
   @Output() loaded = new EventEmitter<string>();
-  imageDefault: string = './assets/images/default.jpg';
+  imageDefault: string = './../assets/images/default.jpg';
 
   constructor() { }
 

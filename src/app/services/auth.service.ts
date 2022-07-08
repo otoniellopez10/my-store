@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { environment } from '../../environments/environment';
-import { User, CreateUserDTO } from '../models/user.model';
-import { Auth } from '../models/auth.model';
+import { environment } from './../../environments/environment';
+import { User, CreateUserDTO } from './../models/user.model';
+import { Auth } from './../models/auth.model';
 import { TokenService } from './token.service';
 
 @Injectable({
