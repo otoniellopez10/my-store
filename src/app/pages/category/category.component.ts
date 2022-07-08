@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+
 import Swal from 'sweetalert2';
 
 // Services
@@ -26,25 +28,19 @@ export class CategoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.categoryId = params.get('id')
-      if (this.categoryId) {
-        this.productsService.getByCategory(this.categoryId, this.limit, this.offset)
-          .subscribe({
-            next: data => {
-              this.products = data
-            },
-            error: err => {
-              Swal.fire({
-                title: 'Error',
-                text: err.error.message,
-                icon: 'error',
-              })
-            }
-          })
-
-      }
-    });
+    this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          this.categoryId = params.get('id')
+          if (this.categoryId) {
+            return this.productsService.getByCategory(this.categoryId, this.limit, this.offset)
+          }
+          return []
+        })
+      )
+      .subscribe(data => {
+        this.products = data
+      });
   }
 
   onLoadMore() {
