@@ -26,6 +26,10 @@ export class AuthService {
       );
   }
 
+  logout() {
+    this.tokenService.removeToken();
+  }
+
   getProfile() {
     // let headers = new HttpHeaders()
     // headers.set('Authorization', `Bearer ${token}`);
