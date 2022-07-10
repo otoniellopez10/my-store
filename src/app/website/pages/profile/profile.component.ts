@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+// Services
+import { AuthService } from 'src/app/services/auth.service';
+
+// Models
+import { User } from 'src/app/models/user.model';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -7,9 +13,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  user: User | null = null;
+
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.authService.getProfile()
+      .subscribe({
+        next: (user: User) => {
+          user.role = 'customer';
+          this.user = user;
+        }
+      })
   }
 
 }
