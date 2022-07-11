@@ -20,12 +20,10 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.getProfile()
-      .subscribe({
-        next: (user: User) => {
-          user.role = 'customer';
-          this.user = user;
-        }
+    this.authService.user$
+      .subscribe(data => {
+        if (data) data.role = 'customer'
+        this.user = data;
       })
   }
 
